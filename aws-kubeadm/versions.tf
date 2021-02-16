@@ -24,7 +24,9 @@ provider "aws" {
   region = var.region
 }
 
-provider "kubernetes" {}
+provider "kubernetes" {
+  config_path = module.k8s.kubeconfig
+}
 
 provider "null" {}
 
