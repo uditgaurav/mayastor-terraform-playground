@@ -84,7 +84,6 @@ resource "hcloud_server" "node" {
   name        = "node-${count.index}-${var.cluster_name}"
   server_type = var.node_type
   image       = var.node_image
-  depends_on  = [hcloud_server.master]
   ssh_keys    = concat([for key in hcloud_ssh_key.admin_ssh_keys : key.id], [for key in data.hcloud_ssh_key.existing_ssh_keys : key.id])
   location    = var.hetzner_location
 
@@ -113,20 +112,28 @@ resource "hcloud_server" "node" {
     destination = "${var.server_upload_dir}/bootstrap.sh"
   }
 
-  provisioner "file" {
-    source      = local.kubeadm_join
-    destination = "${var.server_upload_dir}/kubeadm_join"
-  }
-
   provisioner "remote-exec" {
     inline = [
       "set -xve",
       "chmod +x \"${var.server_upload_dir}/bootstrap.sh\"",
       "\"${var.server_upload_dir}/bootstrap.sh\"",
-      "eval $(cat ${var.server_upload_dir}/kubeadm_join) && systemctl enable docker kubelet",
     ]
   }
 
+}
+
+resource "null_resource" "kubeadm_join" {
+  depends_on = [hcloud_server.master, hcloud_server.node]
+  triggers = {
+    kubeadm_join_script = templatefile("${path.module}/templates/kubeadm_join.sh", {
+      k8s_nodes_ipv4 = join(" ", [for node in hcloud_server.node : node.ipv4_address]),
+      join_file      = local.kubeadm_join,
+    })
+  }
+
+  provisioner "local-exec" {
+    command = self.triggers.kubeadm_join_script
+  }
 }
 
 resource "null_resource" "cluster_firewall_master" {
