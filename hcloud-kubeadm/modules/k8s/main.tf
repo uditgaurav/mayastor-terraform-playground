@@ -24,7 +24,7 @@ data "hcloud_ssh_key" "existing_ssh_keys" {
 resource "hcloud_server" "master" {
   name        = "master-${var.cluster_name}"
   server_type = var.master_type
-  image       = var.master_image
+  image       = 32240016
   ssh_keys    = concat([for key in hcloud_ssh_key.admin_ssh_keys : key.id], [for key in data.hcloud_ssh_key.existing_ssh_keys : key.id])
   location    = var.hetzner_location
 
@@ -83,7 +83,7 @@ resource "hcloud_server" "node" {
   count       = var.node_count
   name        = "node-${count.index}-${var.cluster_name}"
   server_type = var.node_type
-  image       = var.node_image
+  image       = 32240016
   depends_on  = [hcloud_server.master]
   ssh_keys    = concat([for key in hcloud_ssh_key.admin_ssh_keys : key.id], [for key in data.hcloud_ssh_key.existing_ssh_keys : key.id])
   location    = var.hetzner_location
