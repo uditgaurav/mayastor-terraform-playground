@@ -27,3 +27,4 @@
         - create another resource that will wait for this file on master
         - do kubeadm join on nodes depending on this resource
 [ ] make deploy of mayastor optional depending on a variable `deploy_mayastor` (like in `aws-kubeadm`)
+[ ] move installing iscsi daemon from k8s to mayastor-dependencies module
