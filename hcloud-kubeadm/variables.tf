@@ -95,7 +95,7 @@ variable "kubernetes_version" {
 
 variable "docker_version" {
   description = "Which docker version to use for kubernetes"
-  default     = "20.0.5"
+  default     = "20.10"
 }
 
 variable "node_type" {

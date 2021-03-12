@@ -49,7 +49,7 @@ variable "flannel_version" {
 variable "docker_version" {
   type        = string
   description = "Docker version to install."
-  default     = "20.0.5"
+  default     = "20.10"
 }
 
 variable "kubernetes_version" {
