@@ -49,13 +49,13 @@ variable "flannel_version" {
 variable "docker_version" {
   type        = string
   description = "Docker version to install."
-  default     = "19.03"
+  default     = "20.0.5"
 }
 
 variable "kubernetes_version" {
   type        = string
   description = "Kubernetes version to install."
-  default     = "1.19.4"
+  default     = "1.20.4"
 }
 
 variable "deploy_mayastor" {
@@ -121,4 +121,9 @@ variable "docker_insecure_registry" {
   type        = string
   description = "Set trusted docker registry on worker nodes (handy for private registry)"
   default     = ""
+}
+
+variable "kernel_version" {
+  description = "Which kernel version to install. Must be a version available in used ubuntu version. A linux-modules-extra must exist for that version."
+  default     = "5.8.0-44-generic"
 }

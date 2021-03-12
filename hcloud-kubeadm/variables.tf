@@ -87,3 +87,30 @@ variable "cluster_name" {
   type        = string
   description = "Cluster name. Used as a suffix for SSH keys, node names and volumes."
 }
+
+variable "kubernetes_version" {
+  description = "Which kubernetes version to install"
+  default     = "1.20.4"
+}
+
+variable "docker_version" {
+  description = "Which docker version to use for kubernetes"
+  default     = "20.0.5"
+}
+
+variable "node_type" {
+  description = "Which node type to use. See https://www.hetzner.com/cloud"
+  default     = "cpx21"
+}
+
+variable "kernel_version" {
+  description = "Which kernel version to install. Must be a version available in used ubuntu version. A linux-modules-extra must exist for that version."
+  default     = "5.8.0-44-generic"
+}
+
+variable "nr_hugepages" {
+  type        = number
+  description = "Number of 2MB hugepages to allocate on the worker node"
+  default     = 1024
+}
+

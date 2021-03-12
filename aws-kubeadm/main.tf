@@ -25,6 +25,7 @@ module "mayastor-dependencies" {
 
   docker_insecure_registry = var.docker_insecure_registry
   k8s_master_ip            = module.k8s.cluster_nodes[0].public_ip
+  kernel_version           = var.kernel_version
 
   workers = {
     for worker in slice(module.k8s.cluster_nodes, 1, length(module.k8s.cluster_nodes)) :
