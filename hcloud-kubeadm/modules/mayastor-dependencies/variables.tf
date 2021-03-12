@@ -16,3 +16,8 @@ variable "docker_insecure_registry" {
 }
 
 variable "k8s_master_ip" {}
+
+variable "kernel_version" {
+  description = "Which kernel version to install. Must be a version available in used ubuntu version. A linux-modules-extra must exist for that version."
+}
+

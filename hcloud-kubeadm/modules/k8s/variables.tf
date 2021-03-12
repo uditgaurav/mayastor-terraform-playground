@@ -10,10 +10,10 @@ variable "master_image" { default = "ubuntu-20.04" }
 variable "master_type" { default = "cx21" }
 variable "node_count" {}
 variable "node_image" { default = "ubuntu-20.04" }
-variable "node_type" { default = "cpx21" }
+variable "node_type" {}
 
-variable "docker_version" { default = "19.03" }
-variable "kubernetes_version" { default = "1.18.9" }
+variable "docker_version" {}
+variable "kubernetes_version" {}
 variable "feature_gates" {
   description = "Add Feature Gates e.g. 'DynamicKubeletConfig=true'"
   default     = ""

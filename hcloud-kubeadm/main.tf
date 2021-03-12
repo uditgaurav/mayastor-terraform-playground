@@ -1,14 +1,17 @@
 module "k8s" {
   source = "./modules/k8s"
 
-  admin_ssh_keys    = var.admin_ssh_keys
-  cluster_name      = var.cluster_name
-  existing_ssh_keys = var.existing_ssh_keys
-  hcloud_csi_token  = var.hcloud_csi_token
-  hcloud_token      = var.hcloud_token
-  hetzner_location  = var.hetzner_location
-  node_count        = var.node_count
-  server_upload_dir = var.server_upload_dir
+  admin_ssh_keys     = var.admin_ssh_keys
+  cluster_name       = var.cluster_name
+  docker_version     = var.docker_version
+  existing_ssh_keys  = var.existing_ssh_keys
+  hcloud_csi_token   = var.hcloud_csi_token
+  hcloud_token       = var.hcloud_token
+  hetzner_location   = var.hetzner_location
+  kubernetes_version = var.kubernetes_version
+  node_count         = var.node_count
+  node_type          = var.node_type
+  server_upload_dir  = var.server_upload_dir
 
   install_packages = var.install_packages
 }
@@ -18,6 +21,8 @@ module "mayastor-dependencies" {
 
   docker_insecure_registry = var.docker_insecure_registry
   k8s_master_ip            = module.k8s.master_ip
+  kernel_version           = var.kernel_version
+  nr_hugepages             = var.nr_hugepages
 
   workers = {
     for worker in slice(module.k8s.cluster_nodes, 1, length(module.k8s.cluster_nodes)) :

@@ -13,14 +13,15 @@ resource "null_resource" "mayastor_dependencies" {
       "set -xve",
       "echo \"${self.triggers.nr_hugepages}\" > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages",
       "echo \"vm.nr_hugepages = ${self.triggers.nr_hugepages}\" > /etc/sysctl.d/10-mayastor-hugepages.conf",
-      "apt-get -qy update && apt-get -qy install linux-modules-extra-5.8.0-43-generic",
+      "apt-get -qy update && apt-get -qy install linux-modules-extra-${self.triggers.kernel_version}",
       "echo 'nvme-tcp' >> /etc/modules",
       "systemd-run /bin/sh -c 'sleep 1 && reboot'", # needed to surely get the hugepages right after boot
     ]
   }
 
   triggers = {
-    nr_hugepages = var.nr_hugepages
+    nr_hugepages   = var.nr_hugepages
+    kernel_version = var.kernel_version
   }
 }
 
