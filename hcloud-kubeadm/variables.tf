@@ -114,3 +114,8 @@ variable "nr_hugepages" {
   default     = 1024
 }
 
+variable "mayastor_device_size" {
+  default     = 10
+  description = "Allocate HCloud volume of this size (GiB) for mayastor backing device. Minimum is 10, maximum is 10000"
+}
+

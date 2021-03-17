@@ -35,3 +35,7 @@ variable "existing_ssh_keys" {
   type        = list(string)
   description = "Use following keys (by name) from HCloud project. Keys must already exist in the project."
 }
+
+variable "mayastor_device_size" {
+  description = "Allocate HCloud volume of this size (GiB) for mayastor backing device."
+}

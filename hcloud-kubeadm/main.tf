@@ -1,17 +1,18 @@
 module "k8s" {
   source = "./modules/k8s"
 
-  admin_ssh_keys     = var.admin_ssh_keys
-  cluster_name       = var.cluster_name
-  docker_version     = var.docker_version
-  existing_ssh_keys  = var.existing_ssh_keys
-  hcloud_csi_token   = var.hcloud_csi_token
-  hcloud_token       = var.hcloud_token
-  hetzner_location   = var.hetzner_location
-  kubernetes_version = var.kubernetes_version
-  node_count         = var.node_count
-  node_type          = var.node_type
-  server_upload_dir  = var.server_upload_dir
+  admin_ssh_keys       = var.admin_ssh_keys
+  cluster_name         = var.cluster_name
+  docker_version       = var.docker_version
+  existing_ssh_keys    = var.existing_ssh_keys
+  hcloud_csi_token     = var.hcloud_csi_token
+  hcloud_token         = var.hcloud_token
+  hetzner_location     = var.hetzner_location
+  kubernetes_version   = var.kubernetes_version
+  mayastor_device_size = var.mayastor_device_size
+  node_count           = var.node_count
+  node_type            = var.node_type
+  server_upload_dir    = var.server_upload_dir
 
   install_packages = var.install_packages
 }
