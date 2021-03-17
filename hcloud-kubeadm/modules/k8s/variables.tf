@@ -7,7 +7,7 @@ variable "server_upload_dir" {}
 variable "admin_ssh_keys" {}
 
 variable "master_image" { default = "ubuntu-20.04" }
-variable "master_type" { default = "cx21" }
+variable "master_type" { default = "cpx31" }
 variable "node_count" {}
 variable "node_image" { default = "ubuntu-20.04" }
 variable "node_type" {}
