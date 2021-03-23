@@ -15,6 +15,12 @@ variable "docker_insecure_registry" {
   default     = ""
 }
 
+variable "docker_registry_mirror" {
+  type        = string
+  description = "Use registry mirror (pull-through cache) to avoid failures when upstream (docekrhub, quay.io) for images fails or to avoid pull limits"
+  default     = ""
+}
+
 variable "k8s_master_ip" {}
 
 variable "kernel_version" {

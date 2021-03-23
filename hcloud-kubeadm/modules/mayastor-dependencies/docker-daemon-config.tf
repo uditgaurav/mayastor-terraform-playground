@@ -24,7 +24,7 @@ resource "null_resource" "docker_daemon_config_workers" {
     when = destroy
     inline = [
       "set -e",
-      "rm /etc/docker/daemon.json",
+      "rm -f /etc/docker/daemon.json",
       "systemctl restart docker",
     ]
   }
@@ -33,6 +33,7 @@ resource "null_resource" "docker_daemon_config_workers" {
     docker_config = <<-EOF
     {
       "insecure-registries" : ${var.docker_insecure_registry != "" ? jsonencode([var.docker_insecure_registry]) : "[]"}
+      ${var.docker_registry_mirror != "" ? ",\"registry-mirrors\": [\"${var.docker_registry_mirror}\"]" : ""}
     }
     EOF
     workers       = jsonencode(var.workers)

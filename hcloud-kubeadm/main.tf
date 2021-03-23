@@ -21,6 +21,7 @@ module "mayastor-dependencies" {
   source = "./modules/mayastor-dependencies"
 
   docker_insecure_registry = var.docker_insecure_registry
+  docker_registry_mirror   = var.docker_registry_mirror
   k8s_master_ip            = module.k8s.master_ip
   kernel_version           = var.kernel_version
   nr_hugepages             = var.nr_hugepages
